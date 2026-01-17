@@ -5,9 +5,13 @@ import os
 from collections import Counter
 import hashlib
 import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize OpenAI client
-api_key = os.getenv('OPENAI_API_KEY')
+api_key = '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'
 
 # Create client with proper error handling
 if api_key and api_key != 'your-api-key-here':
