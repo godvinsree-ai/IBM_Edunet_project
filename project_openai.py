@@ -1,11 +1,26 @@
 
 import streamlit as st
-from openai import OpenAI
 import os
 from collections import Counter
 import hashlib
 import json
-from dotenv import load_dotenv
+
+# Try to import dotenv, handle gracefully if not installed
+try:
+    from dotenv import load_dotenv
+    DOTENV_AVAILABLE = True
+except ImportError:
+    DOTENV_AVAILABLE = False
+    def load_dotenv():
+        pass
+
+# Try to import OpenAI, handle gracefully if not installed
+try:
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    OpenAI = None
 
 # Load environment variables from .env file
 load_dotenv()
@@ -14,7 +29,7 @@ load_dotenv()
 api_key = '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'
 
 # Create client with proper error handling
-if api_key and api_key != 'your-api-key-here':
+if OPENAI_AVAILABLE and api_key and api_key != 'your-api-key-here':
     try:
         client = OpenAI(api_key=api_key)
     except Exception as e:
