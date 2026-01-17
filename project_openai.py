@@ -29,13 +29,13 @@ load_dotenv()
 api_key = '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'
 
 # Create client with proper error handling
+client = None
 if OPENAI_AVAILABLE and api_key and api_key != 'your-api-key-here':
     try:
         client = OpenAI(api_key=api_key)
     except Exception as e:
+        print(f"OpenAI client initialization error: {e}")
         client = None
-else:
-    client = None
 
 # Mock recipes for fallback when API quota is exceeded
 MOCK_RECIPES = {
